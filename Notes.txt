@@ -12,7 +12,7 @@ const jsxHeading = <h1>This is Hello From JSX</h1>;
 Functional Component => A function which returns a React component or piece of JSX code.
 
 Component Composition => Using a component inside a component.
-Eg - 
+Eg -
 const Title = () => <h1>Namaste React</h1>;
 const HeadingComponent = () => {
   return (
@@ -23,6 +23,23 @@ const HeadingComponent = () => {
     </div>
   );
 };
+
+Important Points on useEffect -
+
+1. if no dependency array => called on every render
+Eg-
+useEffect(()=>{
+	console.log("useEffect called);
+})
+
+2. if dependency array is blank = [] => called on initial render (only once)
+Eg-
+useEffect(()=>{
+	console.log("useEffect called);
+},[])
+
+3. if dependency array is [dependency] => called everytime dependency is updated.
+
 
 
 Assignement - 1
@@ -529,6 +546,3 @@ Vite, Webpack, and Parcel are all popular JavaScript bundlers used in modern web
 - Parcel is well-suited for small to medium-sized projects and is especially popular for quickly setting up static sites or simple web applications with minimal setup.
 
 In summary, Vite, Webpack, and Parcel are all powerful bundlers used in modern web development. Vite is optimized for fast development workflows with Vue.js and React, Webpack is highly configurable and suitable for various types of projects, and Parcel is a simple and easy-to-use bundler for small to medium-sized projects. The choice between these bundlers often depends on the project's specific requirements, complexity, and the desired development experience.
-
-
-

@@ -1,24 +1,51 @@
-import React from "react";
+import React, {lazy,Suspense} from "react";
 import ReactDOM from "react-dom/client";
+import Header from "./Components/Header";
+import Body from "./Components/Body";
+import About from "./Components/About";
+import Error from "./Components/Error";
+import RestuarantMenu from "./Components/RestuarantMenu";
+import { createBrowserRouter,RouterProvider,Outlet } from "react-router-dom";
+// import Contact from "./Components/Contact";
 
-// JSX (Transpiled befoore it reahes the JS Engine) - PARCEL - BABEL
-//JSX => Babel transpiles it to React.createElement => React Element - JS Object => HTMLElement(Readable
+const Contact = lazy(()=>import("./Components/Contact"))
 
-// const jsxHeading = <h1>This is Hello From JSX</h1>;
-// console.log(jsxHeading);
+const App = () => {
+	return (
+		<div>
+			<Header />
+			<Outlet/>
+		</div>
 
-const Title = () => <h1>Namaste React</h1>;
-
-const HeadingComponent = () => {
-  return (
-    <div className="container">
-      <Title />
-      <h1>This is h1</h1>
-      <h2>This is h2</h2>
-    </div>
   );
 };
 
+const appRouter = createBrowserRouter([
+	{
+		path: "/",
+		element: <App />,
+		children: [
+			{
+				path: "/",
+				element: <Body />
+			},
+			{
+				path: "/about",
+				element: <About />
+			},
+			{
+				path: "/restuarants/:id",
+				element: <RestuarantMenu/>
+			},
+			{
+				path: "/contact",
+				element: <Suspense><Contact/></Suspense>
+			}
+		],
+		errorElement: <Error />
+	}
+])
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(<HeadingComponent />);
+root.render(<RouterProvider router={appRouter} />);
