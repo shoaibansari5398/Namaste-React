@@ -38,16 +38,16 @@ const Body = () => {
 	return (
 		<div className="body-container">
 
-			<div className="filters">
-				<div className="search-container">
-					<input type="text" onChange={(e)=>setSearchText(e.target.value)} />
-					<button className="btn-search" onClick={searchHandler}>Search</button>
+			<div className="flex my-4">
+				<div className="ml-4">
+					<input type="text" onChange={(e)=>setSearchText(e.target.value)} className="border-black border rounded-md" />
+					<button className="bg-slate-200 py-1 px-2 mx-2 rounded-md hover:bg-slate-300" onClick={searchHandler}>Search</button>
 				</div>
-				<button className="filter-btn" onClick={filterDataHandler}>
+				<button className="bg-slate-200 py-1 px-3 mx-2 rounded-md" onClick={filterDataHandler}>
 					Filter
 				</button>
 			</div>
-			<div className="card-container">
+			<div className="grid grid-cols-5 ">
 				{
 					filteredData.map(card => <Link key={ card.data.data.id} to={"/restuarants/" +  card.data.data.id }><RestuarantCard cardDetails={card}  /></Link>)
 				}
